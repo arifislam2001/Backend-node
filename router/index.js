@@ -1,12 +1,15 @@
-const express = require("express")
+const express = require("express");
+const router = express.Router();
 
-const router = express.Router()
+const authrouter = require("./api/index");
+const { submitFeedback, getAllFeedback } = require("../controller/feedbackController");
 
-const authrouter = require("./api/index")
+const api = process.env.BASE_URL || `/api/v1`;
 
-const api = process.env.BASE_URL || `/api/v1`
+router.use(api, authrouter);
 
 
-router.use(api , authrouter)
+router.post("/api/submit", submitFeedback);
+router.get("/api/submit", getAllFeedback);
 
-module.exports = router
+module.exports = router;
